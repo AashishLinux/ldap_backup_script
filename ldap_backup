@@ -1,0 +1,11 @@
+#!/bin/bash
+#Owner Aashish Chaurasiya
+#Date 08 Dec 2021
+mkdir -p  /backup_ldap/{Ldap_Backup_1ST,Ldap_Backup_2ST} >/dev/null 2>&1
+chown -R zimbra.zimbra /backup_ldap/{Ldap_Backup_1ST,Ldap_Backup_2ST} >/dev/null 2>&1
+rm -rf /backup_ldap/Ldap_Backup_2ST/*
+mv /backup_ldap/Ldap_Backup_1ST/* /backup_ldap/Ldap_Backup_2ST/  >/dev/null 2>&1
+
+su - zimbra -c '/opt/zimbra/libexec/zmslapcat -c /backup_ldap/Ldap_Backup_1ST'
+su - zimbra -c '/opt/zimbra/libexec/zmslapcat /backup_ldap/Ldap_Backup_1ST'
+
